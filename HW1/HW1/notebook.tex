@@ -1,0 +1,1396 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{CSE 152: Intro to Computer Vision - Spring 2019 Assignment
+1}\label{cse-152-intro-to-computer-vision---spring-2019-assignment-1}
+
+\subsection{Instructor: David Kriegman}\label{instructor-david-kriegman}
+
+\subsubsection{Assignment published on Friday, April 12,
+2019}\label{assignment-published-on-friday-april-12-2019}
+
+\subsubsection{Due on Wednesday, April 24, 2019 at
+11:59pm}\label{due-on-wednesday-april-24-2019-at-1159pm}
+
+\subsection{Instructions}\label{instructions}
+
+\begin{itemize}
+\tightlist
+\item
+  This assignment must be completed individually. Review the academic
+  integrity and collaboration policies on the course website.
+\item
+  All solutions should be written in this notebook.
+\item
+  If you want to modify the skeleton code, you may do so. It has been
+  merely been provided as a framework for your solution.
+\item
+  You may use Python packages for basic linear algebra (e.g. NumPy or
+  SciPy for basic operations), but you may not use packages that
+  directly solve the problem. If you are unsure about using a specific
+  package or function, ask the instructor and/or teaching assistants for
+  clarification.
+\item
+  You must submit this notebook exported as a PDF. You must also submit
+  this notebook as an \texttt{.ipynb} file. Submit both files
+  (\texttt{.pdf} and \texttt{.ipynb}) on Gradescope. \textbf{You must
+  mark the PDF pages associated with each question in Gradescope. If you
+  fail to do so, we may dock points.}
+\item
+  It is highly recommended that you begin working on this assignment
+  early.
+\item
+  \textbf{Late policy:} a penalty of 10\% per day after the due date.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Setup}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{from} \PY{n+nn}{time} \PY{k}{import} \PY{n}{time}
+         \PY{k+kn}{from} \PY{n+nn}{skimage} \PY{k}{import} \PY{n}{io}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \subsection{Geometric Image Formation}\label{geometric-image-formation}
+
+In this problem, we'll practice applying perspective projection and
+rigid transformations. Our goal will be to photograph the following four
+points, which are currently in the frame \(A\) coordinate system. (This
+is not necessarily the same as the camera frame.)
+
+\begin{align*}
+^AP_1 = \begin{bmatrix}-2 \\ -1 \\ 3\end{bmatrix},~
+^AP_2 = \begin{bmatrix}2 \\ -1 \\ 3\end{bmatrix},~
+^AP_3 = \begin{bmatrix}2 \\ 1 \\ 3\end{bmatrix},~
+^AP_4 = \begin{bmatrix}-2 \\ 1 \\ 3\end{bmatrix}
+\end{align*}
+
+In order to accomplish our simulated photography goals, we will need to
+make use of intrinsic and extrinsic matrices for image formation. The
+first step in any given projection process will be rigid
+transformation(s) which put the coordinates of the point into the frame
+of the camera. A rigid transformation can be written
+
+\[^BP = \text{ } ^B_AR\text{ }^AP + \text{ } ^BO_A\]
+
+where \(^BP\) is the point in the target (\(B\)) coordinate frame.
+\(^AP\) is the point in the source (\(A\)) coordinate frame. \(^B_AR\)
+is the rotation matrix from \(A\) to \(B\), and \(^BO_A\) is the origin
+of the coordinate system \(A\) expressed in \(B\) coordinates. The
+rotation and translation from system \(A\) to system \(B\) can be
+combined into a single 4 \(\times\) 4 extrinsic matrix, \(P_e\), s.t.
+\(^BP = P_e \cdot \text{ }^AP\).
+
+Then the point(s) in camera coordinates can be photographed using the
+intrinsic matrix, \(P_i\), which is a 3 \(\times\) 4 matrix transforming
+homogeneous 3D points to homogeneous 2D image points. Mathematically,
+the image of a point \(^AP\) can be calculated as
+\(P_i \cdot P_e \cdot \text{ }^AP\). For more details, see Lecture 2.
+
+(Alternatively, the extrinsic matrix can be \(3 \times 4\) and the
+intrinsic matrix can be \(3 \times 3\), but as our current formulation
+keeps all intermediate results in homogeneous coordinates, we will go
+with that one.)
+
+We will consider five different settings of focal length, viewing angle,
+and camera position (see below). For each of these, you should calculate
+the extrinsic and intrinsic matrices for pinhole perspective projection,
+and then use said matrices to compute and plot the image of the four
+vertices.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{{[}No rigid body transformation{]}} Focal length = 1. The
+  optical axis of the camera is aligned with the z-axis.
+\item
+  \textbf{{[}Translation{]}} Focal length = 1. The optical axis of the
+  camera is aligned with the z-axis. \(^BO_A = [\text{0 0 2}]^T\).
+\item
+  \textbf{{[}Translation and rotation{]}} Focal length = 1. \(^B_AR\)
+  encodes a 60 degrees around the z-axis and then 30 degrees around the
+  y-axis. \(^BO_A = [\text{0 0 2}]^T\).
+\item
+  \textbf{{[}Translation and rotation, long distance{]}} Focal length =
+  7. \(^B_AR\) encodes a 60 degrees around the z-axis and then 30
+  degrees around the y-axis. \(^BO_A = [\text{0 0 11}]^T\).
+\item
+  \textbf{{[}Two rigid transformations{]}} Focal length = 7. \(^B_AR\)
+  encodes a 60 degrees around the z-axis and then 30 degrees around the
+  y-axis. \(^BO_A = [\text{0 0 11}]^T\).
+  \(^C_BR = \begin{bmatrix}1 & 0 & 0 \\ 0 & 0.834 & -0.546 \\ 0 & 0.546 & 0.834\end{bmatrix}^{-1}\).
+  \(^CO_B = [\text{1 2 1}]^T\). For this case, the camera frame is frame
+  \(C\). Also, note the inverse on the rotation matrix. Do not use a
+  predefined matrix inverse function to compute this inverse (except for
+  verification if you wish); instead use the fact that it is an
+  orthogonal matrix and apply one of the properties of orthogonal
+  matrices to more efficiently compute the inverse. (If you are not sure
+  what we are referring to, consult page 20 of the Lecture 2 slides and
+  check the properties of rotation matrices.)
+\end{enumerate}
+
+Note that we will not use a full intrinsic camera matrix (one that maps
+centimeters to pixels and defines the coordinates of the center of
+projection). The only intrinsic parameter we will use is the focal
+length \(f\). (The other parameters should therefore be set to 0 in the
+intrinsic matrix.) Use the perspective equations \(\frac{fx}{z}\),
+\(\frac{fy}{z}\) i.e. without the negative sign.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} convert points from Euclidean to homogeneous}
+         \PY{k}{def} \PY{n+nf}{to\PYZus{}homog}\PY{p}{(}\PY{n}{points}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Transform into a horizontal array for easier access}
+             \PY{n}{newP} \PY{o}{=} \PY{n}{points}\PY{o}{.}\PY{n}{T}
+             \PY{n}{size} \PY{o}{=} \PY{n}{newP}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{output} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{size}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{newP}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             \PY{k}{return} \PY{n}{output}\PY{o}{.}\PY{n}{T}
+         
+         \PY{c+c1}{\PYZsh{} convert points from homogeneous to Euclidean}
+         \PY{k}{def} \PY{n+nf}{from\PYZus{}homog}\PY{p}{(}\PY{n}{points\PYZus{}homog}\PY{p}{)}\PY{p}{:}
+             \PY{n}{newP} \PY{o}{=} \PY{n}{points\PYZus{}homog}\PY{o}{.}\PY{n}{T}
+             \PY{n}{size} \PY{o}{=} \PY{n}{newP}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{output} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{last} \PY{o}{=} \PY{n}{newP}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{size} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{size} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{newP}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{n}{last}  
+             \PY{k}{return} \PY{n}{output}\PY{o}{.}\PY{n}{T}
+         
+         \PY{c+c1}{\PYZsh{} project 3D Euclidean points to 2D Euclidean}
+         \PY{k}{def} \PY{n+nf}{project\PYZus{}points}\PY{p}{(}\PY{n}{P\PYZus{}int}\PY{p}{,} \PY{n}{P\PYZus{}ext}\PY{p}{,} \PY{n}{pts}\PY{p}{)}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} Convert points from Euclidean to homogeneous first}
+             \PY{n}{pt1} \PY{o}{=} \PY{n}{to\PYZus{}homog}\PY{p}{(}\PY{n}{pts}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{pt2} \PY{o}{=} \PY{n}{to\PYZus{}homog}\PY{p}{(}\PY{n}{pts}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+             \PY{n}{pt3} \PY{o}{=} \PY{n}{to\PYZus{}homog}\PY{p}{(}\PY{n}{pts}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+             \PY{n}{pt4} \PY{o}{=} \PY{n}{to\PYZus{}homog}\PY{p}{(}\PY{n}{pts}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+             \PY{n}{hom\PYZus{}pts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{pt1}\PY{p}{,} \PY{n}{pt2}\PY{p}{,} \PY{n}{pt3}\PY{p}{,} \PY{n}{pt4}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Now apply the Intrinsic and Extrinsic matrices}
+             \PY{n}{P\PYZus{}final} \PY{o}{=} \PY{n}{P\PYZus{}int}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{P\PYZus{}ext}\PY{p}{)}
+             \PY{n}{pt1} \PY{o}{=} \PY{n}{P\PYZus{}final}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{pt1}\PY{p}{)}
+             \PY{n}{pt2} \PY{o}{=} \PY{n}{P\PYZus{}final}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{pt2}\PY{p}{)}
+             \PY{n}{pt3} \PY{o}{=} \PY{n}{P\PYZus{}final}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{pt3}\PY{p}{)}
+             \PY{n}{pt4} \PY{o}{=} \PY{n}{P\PYZus{}final}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{pt4}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}output = P\PYZus{}int.dot(hom\PYZus{}pts)}
+             \PY{c+c1}{\PYZsh{}output = output.dot(P\PYZus{}ext)}
+             
+             \PY{c+c1}{\PYZsh{} Now tranform it all back to Euclidean}
+             \PY{n}{pt1} \PY{o}{=} \PY{n}{from\PYZus{}homog}\PY{p}{(}\PY{n}{pt1}\PY{p}{)}
+             \PY{n}{pt2} \PY{o}{=} \PY{n}{from\PYZus{}homog}\PY{p}{(}\PY{n}{pt2}\PY{p}{)}
+             \PY{n}{pt3} \PY{o}{=} \PY{n}{from\PYZus{}homog}\PY{p}{(}\PY{n}{pt3}\PY{p}{)}
+             \PY{n}{pt4} \PY{o}{=} \PY{n}{from\PYZus{}homog}\PY{p}{(}\PY{n}{pt4}\PY{p}{)}
+             \PY{n}{euc\PYZus{}pts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{pt1}\PY{p}{,} \PY{n}{pt2}\PY{p}{,} \PY{n}{pt3}\PY{p}{,} \PY{n}{pt4}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{euc\PYZus{}pts}
+         
+         \PY{c+c1}{\PYZsh{} In the five camera functions below, change the matrices as per each of the cases as described above.}
+         \PY{c+c1}{\PYZsh{} Make sure that we can see the formula (if one exists) being used to fill in the matrices.}
+         \PY{c+c1}{\PYZsh{} If there is anything you feel the need to explain, feel free to document it with comments.}
+         
+         \PY{k}{def} \PY{n+nf}{getP\PYZus{}Int}\PY{p}{(}\PY{n}{focal}\PY{p}{)}\PY{p}{:}
+             \PY{n}{P\PYZus{}int} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+             \PY{n}{P\PYZus{}int}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{focal}
+             \PY{n}{P\PYZus{}int}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{focal}
+             \PY{k}{return} \PY{n}{P\PYZus{}int}
+         
+         \PY{c+c1}{\PYZsh{} getP\PYZus{}Ext gets all the input and returns a whole P\PYZus{}Ext output}
+         \PY{k}{def} \PY{n+nf}{getP\PYZus{}Ext}\PY{p}{(}\PY{n}{origin} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{xTheta} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{yTheta} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{zTheta} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{order} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+             \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+             \PY{n}{z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{xTheta} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{xTheta} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/} \PY{l+m+mi}{180}\PY{p}{)}
+                 \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{xTheta} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/} \PY{l+m+mi}{180}\PY{p}{)}
+                 \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{c}
+                 \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{s}
+                 \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{s}
+             \PY{k}{if} \PY{n}{yTheta} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{yTheta} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/} \PY{l+m+mi}{180}\PY{p}{)}
+                 \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{yTheta} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/} \PY{l+m+mi}{180}\PY{p}{)}
+                 \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{c}
+                 \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{s}
+                 \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{s}
+             \PY{k}{if} \PY{n}{zTheta} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{zTheta} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/} \PY{l+m+mi}{180}\PY{p}{)}
+                 \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{zTheta} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/} \PY{l+m+mi}{180}\PY{p}{)}
+                 \PY{n}{z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{c}
+                 \PY{n}{z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{s}
+                 \PY{n}{z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{s}
+             
+             \PY{k}{if} \PY{n}{order}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{order}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                     \PY{n}{rotFinal} \PY{o}{=} \PY{n}{z}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{rotFinal} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{k}{elif} \PY{n}{order}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{order}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                     \PY{n}{rotFinal} \PY{o}{=} \PY{n}{z}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{rotFinal} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{order}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                     \PY{n}{rotFinal} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{z}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{rotFinal} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{z}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{rotFinal}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{origin}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             
+             \PY{k}{return} \PY{n}{rotFinal}
+         
+         \PY{k}{def} \PY{n+nf}{camera1}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} write your code here}
+             
+             \PY{n}{P\PYZus{}int} \PY{o}{=} \PY{n}{getP\PYZus{}Int}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{P\PYZus{}ext} \PY{o}{=} \PY{n}{getP\PYZus{}Ext}\PY{p}{(}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{P\PYZus{}int}\PY{p}{,} \PY{n}{P\PYZus{}ext}
+         
+         \PY{k}{def} \PY{n+nf}{camera2}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} write your code here}
+         
+             \PY{n}{origin} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{P\PYZus{}int} \PY{o}{=} \PY{n}{getP\PYZus{}Int}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{P\PYZus{}ext} \PY{o}{=} \PY{n}{getP\PYZus{}Ext}\PY{p}{(}\PY{n}{origin} \PY{o}{=} \PY{n}{origin}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{P\PYZus{}int}\PY{p}{,} \PY{n}{P\PYZus{}ext}
+         
+         \PY{k}{def} \PY{n+nf}{camera3}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} write your code here}
+         
+             \PY{n}{P\PYZus{}int} \PY{o}{=} \PY{n}{getP\PYZus{}Int}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{origin} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{z} \PY{o}{=} \PY{l+m+mi}{60}
+             \PY{n}{y} \PY{o}{=} \PY{l+m+mi}{30}
+             \PY{n}{order} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{P\PYZus{}ext} \PY{o}{=} \PY{n}{getP\PYZus{}Ext}\PY{p}{(}\PY{n}{origin}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{order}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{P\PYZus{}int}\PY{p}{,} \PY{n}{P\PYZus{}ext}
+         
+         \PY{k}{def} \PY{n+nf}{camera4}\PY{p}{(}\PY{p}{)}\PY{p}{:}    
+             \PY{c+c1}{\PYZsh{} write your code here}
+         
+             \PY{n}{P\PYZus{}int} \PY{o}{=} \PY{n}{getP\PYZus{}Int}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+             \PY{n}{z} \PY{o}{=} \PY{l+m+mi}{60}
+             \PY{n}{y} \PY{o}{=} \PY{l+m+mi}{30}
+             \PY{n}{origin} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{]}
+             \PY{n}{order} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{P\PYZus{}ext} \PY{o}{=} \PY{n}{getP\PYZus{}Ext}\PY{p}{(}\PY{n}{origin}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{order}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{P\PYZus{}int}\PY{p}{,} \PY{n}{P\PYZus{}ext}
+         
+         \PY{k}{def} \PY{n+nf}{camera5}\PY{p}{(}\PY{p}{)}\PY{p}{:}    
+             \PY{c+c1}{\PYZsh{} write your code here}
+             
+             \PY{n}{P\PYZus{}int} \PY{o}{=} \PY{n}{getP\PYZus{}Int}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+             \PY{n}{RotC} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+                 \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.834}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.546}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.546}\PY{p}{,} \PY{l+m+mf}{0.834}\PY{p}{]}
+             \PY{p}{]}\PY{p}{)}
+             \PY{n}{RotC} \PY{o}{=} \PY{n}{RotC}\PY{o}{.}\PY{n}{T}
+             \PY{n}{originC} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+             
+             \PY{n}{ext\PYZus{}c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3} \PY{o+ow}{and} \PY{n}{j} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}\PY{p}{:}
+                         \PY{n}{ext\PYZus{}c}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{RotC}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                     \PY{k}{if} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3} \PY{o+ow}{and} \PY{n}{j} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{:}
+                         \PY{n}{ext\PYZus{}c}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{originC}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             
+             \PY{n}{z} \PY{o}{=} \PY{l+m+mi}{60}
+             \PY{n}{y} \PY{o}{=} \PY{l+m+mi}{30}
+             \PY{n}{origin} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{]}
+             \PY{n}{order} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{P\PYZus{}ext} \PY{o}{=} \PY{n}{getP\PYZus{}Ext}\PY{p}{(}\PY{n}{origin}\PY{p}{,} \PY{n}{zTheta} \PY{o}{=} \PY{n}{z}\PY{p}{,} \PY{n}{yTheta} \PY{o}{=} \PY{n}{y}\PY{p}{,} \PY{n}{order} \PY{o}{=} \PY{n}{order}\PY{p}{)}
+             \PY{n}{P\PYZus{}ext} \PY{o}{=} \PY{n}{ext\PYZus{}c}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{P\PYZus{}ext}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{P\PYZus{}int}\PY{p}{,} \PY{n}{P\PYZus{}ext}
+         
+         \PY{c+c1}{\PYZsh{} Use the following code to display your outputs}
+         \PY{c+c1}{\PYZsh{} You are free to change the axis parameters to better }
+         \PY{c+c1}{\PYZsh{} display your quadrilateral but do not remove any annotations}
+         
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}points}\PY{p}{(}\PY{n}{points}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.\PYZhy{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{inds} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{points}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{points}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{inds}\PY{p}{]}\PY{p}{,} \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{inds}\PY{p}{]}\PY{p}{,} \PY{n}{style}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{points}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{inds}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}
+                     \PY{n+nb}{str}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{points}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inds}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,  }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{points}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inds}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                     \PY{p}{(}\PY{n}{points}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inds}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inds}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{title}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+             \PY{k}{if} \PY{n}{axis}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{n}{axis}\PY{p}{)}
+                 
+             \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{point1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{point2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{point3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{point4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{points} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{point1}\PY{p}{,} \PY{n}{point2}\PY{p}{,} \PY{n}{point3}\PY{p}{,} \PY{n}{point4}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{camera} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{[}\PY{n}{camera1}\PY{p}{,} \PY{n}{camera2}\PY{p}{,} \PY{n}{camera3}\PY{p}{,} \PY{n}{camera4}\PY{p}{,} \PY{n}{camera5}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{P\PYZus{}int}\PY{p}{,} \PY{n}{P\PYZus{}ext} \PY{o}{=} \PY{n}{camera}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{proj\PYZus{}points} \PY{o}{=} \PY{n}{project\PYZus{}points}\PY{p}{(}\PY{n}{P\PYZus{}int}\PY{p}{,} \PY{n}{P\PYZus{}ext}\PY{p}{,} \PY{n}{points}\PY{p}{)}
+             \PY{n}{x\PYZus{}neg} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{proj\PYZus{}points}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}
+             \PY{n}{x\PYZus{}pos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{proj\PYZus{}points}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{0.5}
+             \PY{n}{y\PYZus{}neg} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{proj\PYZus{}points}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}
+             \PY{n}{y\PYZus{}pos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{proj\PYZus{}points}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{0.1}
+             \PY{n}{plot\PYZus{}points}\PY{p}{(}\PY{n}{proj\PYZus{}points}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Camera }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{p}{[}\PY{n}{x\PYZus{}neg}\PY{p}{,}\PY{n}{x\PYZus{}pos}\PY{p}{,}\PY{n}{y\PYZus{}neg}\PY{p}{,}\PY{n}{y\PYZus{}pos}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Filtering}\label{filtering}
+
+In this problem, you will implement the convolution filtering operation
+in NumPy.
+
+As shown in the lecture, a convolution can be considered as a sliding
+window that computes a sum of the pixel values weighted by the flipped
+kernel. Your version will i) zero-pad an image, ii) flip the kernel
+horizontally and vertically, and iii) compute a weighted sum of the
+neighborhood at each pixel.
+
+First you will want to implement the \textbf{zero\_pad} function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{zero\PYZus{}pad}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{pad\PYZus{}top}\PY{p}{,} \PY{n}{pad\PYZus{}down}\PY{p}{,} \PY{n}{pad\PYZus{}left}\PY{p}{,} \PY{n}{pad\PYZus{}right}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Zero\PYZhy{}pad an image.}
+         
+         \PY{l+s+sd}{    Ex: a 1x1 image [[1]] with pad\PYZus{}top = 1, pad\PYZus{}down = 1, pad\PYZus{}left = 2, pad\PYZus{}right = 2 becomes:}
+         
+         \PY{l+s+sd}{        [[0, 0, 0, 0, 0],}
+         \PY{l+s+sd}{         [0, 0, 1, 0, 0],}
+         \PY{l+s+sd}{         [0, 0, 0, 0, 0]]         of shape (3, 5)}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        image: numpy array of shape (H, W)}
+         \PY{l+s+sd}{        pad\PYZus{}width: width of the zero padding (left and right padding)}
+         \PY{l+s+sd}{        pad\PYZus{}height: height of the zero padding (bottom and top padding)}
+         
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        out: numpy array of shape (H+2*pad\PYZus{}height, W+2*pad\PYZus{}width)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         
+             \PY{n}{H}\PY{p}{,} \PY{n}{W} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{shape}
+             \PY{n}{out} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{H} \PY{o}{+} \PY{n}{pad\PYZus{}top} \PY{o}{+} \PY{n}{pad\PYZus{}down}\PY{p}{,} \PY{n}{W} \PY{o}{+} \PY{n}{pad\PYZus{}left} \PY{o}{+} \PY{n}{pad\PYZus{}right}\PY{p}{)}\PY{p}{)}
+         
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} YOUR CODE HERE}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{H}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{W}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{out}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{n}{pad\PYZus{}top}\PY{p}{]}\PY{p}{[}\PY{n}{j} \PY{o}{+} \PY{n}{pad\PYZus{}left}\PY{p}{]} \PY{o}{=} \PY{n}{image}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END YOUR CODE}
+         
+             \PY{k}{return} \PY{n}{out}
+         
+         \PY{c+c1}{\PYZsh{} Open image as grayscale}
+         \PY{n}{img} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dog.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{as\PYZus{}grey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}img = imread(\PYZsq{}dog.jpg\PYZsq{}, mode=\PYZsq{}F\PYZsq{})}
+         
+         \PY{c+c1}{\PYZsh{} Show image}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{pad\PYZus{}width} \PY{o}{=} \PY{l+m+mi}{20} \PY{c+c1}{\PYZsh{} width of the padding on the left and right}
+         \PY{n}{pad\PYZus{}height} \PY{o}{=} \PY{l+m+mi}{40} \PY{c+c1}{\PYZsh{} height of the padding on the top and bottom}
+         
+         \PY{n}{padded\PYZus{}img} \PY{o}{=} \PY{n}{zero\PYZus{}pad}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{pad\PYZus{}height}\PY{p}{,} \PY{n}{pad\PYZus{}height}\PY{p}{,} \PY{n}{pad\PYZus{}width}\PY{p}{,} \PY{n}{pad\PYZus{}width}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot your padded dog}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{padded\PYZus{}img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Padded dog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot what you should get}
+         \PY{n}{solution\PYZus{}img} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{padded\PYZus{}dog.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{as\PYZus{}grey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}solution\PYZus{}img = imread(\PYZsq{}padded\PYZus{}dog.jpg\PYZsq{}, mode=\PYZsq{}F\PYZsq{})}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{solution\PYZus{}img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{What you should get}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now implement the function \textbf{\texttt{conv}}, \textbf{using at most
+2 loops}. This function should take an image \(f\) and a kernel \(h\) as
+inputs and output the convolved image \((f*h)\) that has the same shape
+as the input image (use zero padding to accomplish this). Depending on
+the computer, your implementation should take around a second or less to
+run.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{conv}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{kernel}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} An efficient implementation of a convolution filter.}
+         
+         \PY{l+s+sd}{    This function uses element\PYZhy{}wise multiplication and np.sum()}
+         \PY{l+s+sd}{    to efficiently compute a weighted sum of the neighborhood at each}
+         \PY{l+s+sd}{    pixel.}
+         
+         \PY{l+s+sd}{    Hints:}
+         \PY{l+s+sd}{        \PYZhy{} Use the zero\PYZus{}pad function you implemented above}
+         \PY{l+s+sd}{        \PYZhy{} You should need at most two nested for\PYZhy{}loops}
+         \PY{l+s+sd}{        \PYZhy{} You may find np.flip() and np.sum() useful}
+         \PY{l+s+sd}{        \PYZhy{} You need to handle both odd and even kernel size}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        image: numpy array of shape (Hi, Wi)}
+         \PY{l+s+sd}{        kernel: numpy array of shape (Hk, Wk)}
+         
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        out: numpy array of shape (Hi, Wi)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         
+             \PY{n}{Hi}\PY{p}{,} \PY{n}{Wi} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{shape}
+             \PY{n}{Hk}\PY{p}{,} \PY{n}{Wk} \PY{o}{=} \PY{n}{kernel}\PY{o}{.}\PY{n}{shape}
+             \PY{n}{out} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{Hi}\PY{p}{,} \PY{n}{Wi}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{pad\PYZus{}height} \PY{o}{=} \PY{n}{Hk}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}
+             \PY{n}{pad\PYZus{}width} \PY{o}{=} \PY{n}{Wk}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}
+             \PY{n}{padded} \PY{o}{=} \PY{n}{zero\PYZus{}pad}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{pad\PYZus{}height}\PY{p}{,} \PY{n}{pad\PYZus{}height}\PY{p}{,} \PY{n}{pad\PYZus{}width}\PY{p}{,} \PY{n}{pad\PYZus{}width}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} YOUR CODE HERE}
+             \PY{n}{kernel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{flip}\PY{p}{(}\PY{n}{kernel}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{kernel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{flip}\PY{p}{(}\PY{n}{kernel}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{Hi}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{Wi}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{out} \PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{padded}\PY{p}{[}\PY{n}{i}\PY{p}{:} \PY{n}{i} \PY{o}{+} \PY{n}{Hk}\PY{p}{,} \PY{n}{j}\PY{p}{:} \PY{n}{j} \PY{o}{+} \PY{n}{Wk}\PY{p}{]} \PY{o}{*} \PY{n}{kernel}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END YOUR CODE}
+         
+             \PY{k}{return} \PY{n}{out}
+         
+         \PY{c+c1}{\PYZsh{} Simple convolution kernel.}
+         \PY{c+c1}{\PYZsh{} Feel free to change the kernel and to see different outputs.}
+         \PY{n}{kernel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}
+         \PY{p}{[}
+             \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{t1} \PY{o}{=} \PY{n}{time}\PY{p}{(}\PY{p}{)}
+         \PY{n}{out} \PY{o}{=} \PY{n}{conv}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{kernel}\PY{p}{)}
+         \PY{n}{t2} \PY{o}{=} \PY{n}{time}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{took }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ seconds.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{t2} \PY{o}{\PYZhy{}} \PY{n}{t1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot original image}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot your convolved image}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{out}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Convolution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot what you should get}
+         \PY{n}{solution\PYZus{}img} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{convolved\PYZus{}dog.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{as\PYZus{}grey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{solution\PYZus{}img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{What you should get}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}height, width = solution\PYZus{}img.shape}
+         \PY{l+s+sd}{print( solution\PYZus{}img)}
+         \PY{l+s+sd}{print(out)}
+         \PY{l+s+sd}{for i in range(height):}
+         \PY{l+s+sd}{    for j in range(width):}
+         \PY{l+s+sd}{        if solution\PYZus{}img[i][j] != out[i][j]:}
+         \PY{l+s+sd}{            print(\PYZdq{}It\PYZsq{}s not the same!\PYZdq{})\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+took 0.674194 seconds.
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} 'height, width = solution\_img.shape\textbackslash{}nprint( solution\_img)\textbackslash{}nprint(out)\textbackslash{}nfor i in range(height):\textbackslash{}n    for j in range(width):\textbackslash{}n        if solution\_img[i][j] != out[i][j]:\textbackslash{}n            print("It\textbackslash{}'s not the same!")'
+\end{Verbatim}
+            
+    Now let's filter some images! Here, you will apply the convolution
+function that you just implemented in order to bring about some
+interesting image effects. More specifically, we will use convolution to
+blur and sharpen our images.
+
+First we will apply convolution for image blurring. To accomplish this,
+convolve the dog image with a 9x9 Gaussian filter for \(\sigma = 5\).
+You can use the included function to obtain the Gaussian kernel.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{gaussian2d}\PY{p}{(}\PY{n}{filter\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{sig}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Creates 2D Gaussian kernel with side length `filter\PYZus{}size` and a sigma of `sig`.}
+         \PY{l+s+sd}{    Source: https://stackoverflow.com/a/43346070}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{filter\PYZus{}size} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mf}{1.}\PY{p}{,} \PY{n}{filter\PYZus{}size} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mf}{1.}\PY{p}{)}
+             \PY{n}{xx}\PY{p}{,} \PY{n}{yy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{ax}\PY{p}{,} \PY{n}{ax}\PY{p}{)}
+             \PY{n}{kernel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{xx}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{yy}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{sig}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{kernel} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{kernel}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{blur\PYZus{}image}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Blur the image by convolving with a Gaussian filter.\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{kernel} \PY{o}{=} \PY{n}{gaussian2d}\PY{p}{(}\PY{p}{)}
+             \PY{n}{out} \PY{o}{=} \PY{n}{conv}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{kernel}\PY{p}{)}
+             \PY{k}{return} \PY{n}{out}
+         
+         \PY{c+c1}{\PYZsh{} Plot original image}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot blurred image}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{blur\PYZus{}image}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Blurred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Next, we will use convolution to sharpen the images. Convolve the image
+with the following filter to produce a sharpened result. For
+convenience, we have defined the filter for you:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{sharpening\PYZus{}kernel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+             \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,}     \PY{l+m+mi}{6}\PY{p}{,}  \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,}   \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{24}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{476}\PY{p}{,} \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,}   \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}  \PY{l+m+mi}{4}\PY{p}{,}    \PY{l+m+mi}{6}\PY{p}{,}  \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+         \PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0} \PY{o}{/} \PY{l+m+mf}{256.0}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{def} \PY{n+nf}{sharpen\PYZus{}image}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Sharpen the image by convolving with a sharpening filter.\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{sharpening\PYZus{}kernel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+                 \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,}     \PY{l+m+mi}{6}\PY{p}{,}  \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,}   \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{24}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{476}\PY{p}{,} \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,}   \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}  \PY{l+m+mi}{4}\PY{p}{,}    \PY{l+m+mi}{6}\PY{p}{,}  \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+             \PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0} \PY{o}{/} \PY{l+m+mf}{256.0}
+             \PY{n}{out} \PY{o}{=} \PY{n}{conv}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{sharpening\PYZus{}kernel}\PY{p}{)}
+             \PY{k}{return} \PY{n}{out}
+         
+         \PY{c+c1}{\PYZsh{} Plot original image}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot sharpened image}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{sharpen\PYZus{}image}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sharpened}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Template Matching}\label{template-matching}
+
+Suppose that you are a clerk at a grocery store. One of your
+responsibilites is to check the shelves periodically and stock them up
+whenever there are sold-out items. You got tired of this laborious task
+and decided to build a computer vision system that keeps track of the
+items on the shelf.
+
+Luckily, you have learned in CSE 152 (or are learning right now) that
+convolution can be used for template matching: a template g is
+multiplied with regions of a larger image f to measure how similar each
+region is to the template. Note that you will want to flip the filter
+before giving it to your convolution function, so that it is overall not
+flipped when making comparisons. You will also want to subtract off the
+mean value of the image or template (whichever you choose, subtract the
+same value from both the image and template) so that our solution is not
+biased toward higher-intensity (white) regions.
+
+The template of a product (template.jpg) and the image of the shelf
+(shelf.jpg) is provided. We will use convolution to find the product in
+the shelf.
+
+ 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Load template and image in grayscale}
+         \PY{n}{img} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{shelf.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{img\PYZus{}grey} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{shelf.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{as\PYZus{}grey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{temp} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{template.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{temp\PYZus{}grey} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{template.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{as\PYZus{}grey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Subtract values off the image and the template}
+         \PY{n}{H}\PY{p}{,} \PY{n}{W} \PY{o}{=} \PY{n}{img\PYZus{}grey}\PY{o}{.}\PY{n}{shape}
+         \PY{n}{avg} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{img\PYZus{}grey}\PY{p}{)}\PY{o}{/} \PY{p}{(}\PY{n}{H} \PY{o}{*} \PY{n}{W}\PY{p}{)}
+         \PY{n}{img\PYZus{}grey} \PY{o}{=} \PY{n}{img\PYZus{}grey} \PY{o}{\PYZhy{}} \PY{n}{avg}
+         \PY{n}{temp\PYZus{}grey} \PY{o}{=} \PY{n}{temp\PYZus{}grey} \PY{o}{\PYZhy{}} \PY{n}{avg}
+         
+         \PY{c+c1}{\PYZsh{} Perform a convolution between the image and the template}
+         \PY{n}{temp\PYZus{}grey} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{flip}\PY{p}{(}\PY{n}{temp\PYZus{}grey}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{temp\PYZus{}grey} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{flip}\PY{p}{(}\PY{n}{temp\PYZus{}grey}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{out} \PY{o}{=} \PY{n}{conv}\PY{p}{(}\PY{n}{img\PYZus{}grey}\PY{p}{,} \PY{n}{temp\PYZus{}grey}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}out = np.zeros\PYZus{}like(img\PYZus{}grey)}
+         
+         \PY{c+c1}{\PYZsh{} Find the location with maximum similarity}
+         \PY{n}{y}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{unravel\PYZus{}index}\PY{p}{(}\PY{n}{out}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{out}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Display product template}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{temp\PYZus{}grey}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Template}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Display convolution output}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{out}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Convolution output (white means more correlated)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Display image}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Result (blue marker on the detected location)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Draw marker at detected location}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ms}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{mew}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Corner Detection}\label{corner-detection}
+
+Next, you will implement a corner detector to detect photo-identifiable
+features in the image.
+
+This should be done according to
+http://cseweb.ucsd.edu/classes/sp19/cse152-a/lec4.pdf. You should fill
+in the function corner\_detect with inputs image, nCorners, smoothSTD,
+windowSize, where smoothSTD is the standard deviation of the smoothing
+kernel and windowSize is the window size for Gaussian smoothing, corner
+detection, and non-maximum suppression. In the lecture the corner
+detector was implemented using a hard threshold. Do not do that; instead
+return the nCorners strongest corners after non-maximum suppression.
+This way you can control exactly how many corners are returned. You can
+use your previous convolution function alongside the previous Gaussian
+kernel function in order to smooth the image.
+
+For each image, detect 100 corners with a Gaussian standard deviation of
+2.0 and a window size of 11. Display your outputs in a matplotlib
+figure.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+         
+         \PY{k}{def} \PY{n+nf}{rgb2gray}\PY{p}{(}\PY{n}{rgb}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Convert rgb image to grayscale.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{rgb}\PY{p}{[}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.299}\PY{p}{,} \PY{l+m+mf}{0.587}\PY{p}{,} \PY{l+m+mf}{0.114}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{corner\PYZus{}detect}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{nCorners}\PY{p}{,} \PY{n}{smoothSTD}\PY{p}{,} \PY{n}{windowSize}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Detect corners on a given image.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        image: Given a grayscale image on which to detect corners.}
+         \PY{l+s+sd}{        nCorners: Total number of corners to be extracted.}
+         \PY{l+s+sd}{        smoothSTD: Standard deviation of the Gaussian smoothing kernel.}
+         \PY{l+s+sd}{        windowSize: Window size for Gaussian smoothing kernel, corner detector, and non maximum suppression.}
+         
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        Detected corners (in image coordinate) in a numpy array (n*2).}
+         
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Your code here:}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} Apply the Smoothing kernel}
+             \PY{n}{gaussKernel} \PY{o}{=} \PY{n}{gaussian2d}\PY{p}{(}\PY{n}{filter\PYZus{}size}\PY{o}{=} \PY{n}{smoothSTD}\PY{p}{)} 
+             \PY{n}{smoothImg} \PY{o}{=} \PY{n}{conv}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{gaussKernel}\PY{p}{)}
+             
+             
+             \PY{c+c1}{\PYZsh{} Apply the gradient kernels (get Ix and Iy for every point)}
+             \PY{n}{gradKernelx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{n}{gradKernely} \PY{o}{=} \PY{n}{gradKernelx}\PY{o}{.}\PY{n}{T}
+             
+             \PY{n}{Ix} \PY{o}{=} \PY{n}{conv}\PY{p}{(}\PY{n}{smoothImg}\PY{p}{,} \PY{n}{gradKernelx}\PY{p}{)}
+             \PY{n}{Iy} \PY{o}{=} \PY{n}{conv}\PY{p}{(}\PY{n}{smoothImg}\PY{p}{,} \PY{n}{gradKernely}\PY{p}{)}
+             
+             \PY{n}{IxIy} \PY{o}{=} \PY{n}{Ix} \PY{o}{*} \PY{n}{Iy}
+             \PY{n}{Ixsqr} \PY{o}{=} \PY{n}{Ix} \PY{o}{*} \PY{n}{Ix}
+             \PY{n}{Iysqr} \PY{o}{=} \PY{n}{Iy} \PY{o}{*} \PY{n}{Iy}
+             
+             \PY{c+c1}{\PYZsh{} Sum the gradients}
+             \PY{n}{sumFilter} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{windowSize}\PY{p}{,} \PY{n}{windowSize}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{sumIxIy} \PY{o}{=} \PY{n}{conv}\PY{p}{(}\PY{n}{IxIy}\PY{p}{,} \PY{n}{sumFilter}\PY{p}{)}
+             \PY{n}{sumIxsqr} \PY{o}{=} \PY{n}{conv}\PY{p}{(}\PY{n}{Ixsqr}\PY{p}{,} \PY{n}{sumFilter}\PY{p}{)}
+             \PY{n}{sumIysqr} \PY{o}{=} \PY{n}{conv}\PY{p}{(}\PY{n}{Iysqr}\PY{p}{,} \PY{n}{sumFilter}\PY{p}{)}
+             
+             \PY{n}{height}\PY{p}{,} \PY{n}{width} \PY{o}{=} \PY{n}{sumIxIy}\PY{o}{.}\PY{n}{shape}
+             
+             
+             \PY{c+c1}{\PYZsh{} Find lambdas and r and C for every pixel}
+             \PY{n}{lambdax} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{height}\PY{p}{,} \PY{n}{width}\PY{p}{)}\PY{p}{)}
+             \PY{n}{lambday} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{height}\PY{p}{,} \PY{n}{width}\PY{p}{)}\PY{p}{)}
+             \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{height}\PY{p}{,} \PY{n}{width}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{h} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{height}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{width}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+                         \PY{p}{[}\PY{n}{sumIxsqr}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]}\PY{p}{,} \PY{n}{sumIxIy}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                         \PY{p}{[}\PY{n}{sumIxIy}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]} \PY{p}{,} \PY{n}{sumIysqr}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]}\PY{p}{]}
+                     \PY{p}{]}\PY{p}{)}
+                     \PY{n}{eigs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{eigvals}\PY{p}{(}\PY{n}{C}\PY{p}{)}
+                     \PY{n}{lambdax}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]} \PY{o}{=} \PY{n}{eigs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                     \PY{n}{lambday}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]} \PY{o}{=} \PY{n}{eigs}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                     \PY{n}{r}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{eigs}\PY{p}{)}
+                     
+                     \PY{c+c1}{\PYZsh{} Set the outside windowSize//2 rows and columns to 0}
+                     \PY{k}{if} \PY{n}{h} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{windowSize}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{h} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{height} \PY{o}{\PYZhy{}} \PY{n}{windowSize}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{:}
+                         \PY{n}{r}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{k}{elif} \PY{n}{w} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{windowSize}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{w} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{width} \PY{o}{\PYZhy{}} \PY{n}{windowSize}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{:}
+                         \PY{n}{r}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+             
+             
+             \PY{c+c1}{\PYZsh{} Other non\PYZhy{}maximum supression}
+             \PY{k}{for} \PY{n}{h} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{height} \PY{o}{\PYZhy{}} \PY{n}{windowSize}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{width} \PY{o}{\PYZhy{}} \PY{n}{windowSize}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{window} \PY{o}{=} \PY{n}{r}\PY{p}{[}\PY{n}{h}\PY{p}{:} \PY{n}{h} \PY{o}{+} \PY{n}{windowSize}\PY{p}{,} \PY{n}{w}\PY{p}{:} \PY{n}{w} \PY{o}{+} \PY{n}{windowSize}\PY{p}{]}
+                     \PY{n}{localMax} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{amax}\PY{p}{(}\PY{n}{window}\PY{p}{)}
+                     \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{windowSize}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{windowSize}\PY{p}{)}\PY{p}{:}
+                             \PY{k}{if} \PY{n}{r}\PY{p}{[}\PY{n}{h} \PY{o}{+} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{w} \PY{o}{+} \PY{n}{j}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{np}\PY{o}{.}\PY{n}{floor}\PY{p}{(}\PY{n}{localMax}\PY{p}{)}\PY{p}{:}
+                                 \PY{n}{r}\PY{p}{[}\PY{n}{h} \PY{o}{+} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{w} \PY{o}{+} \PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+             
+             \PY{c+c1}{\PYZsh{} Find the kth largest r values after supression}
+             \PY{n}{dict\PYZus{}max} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+             \PY{k}{for} \PY{n}{h} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{height}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{width}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{r}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                         \PY{k}{if} \PY{n}{r}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]} \PY{o+ow}{in} \PY{n}{dict\PYZus{}max}\PY{p}{:}
+                             \PY{n}{dict\PYZus{}max}\PY{p}{[}\PY{n}{r}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                         \PY{k}{else}\PY{p}{:}
+                             \PY{n}{dict\PYZus{}max}\PY{p}{[}\PY{n}{r}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                             
+             \PY{n}{maximums} \PY{o}{=} \PY{n}{dict\PYZus{}max}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+             \PY{n}{maximums} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{maximums}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{nth} \PY{o}{=} \PY{n}{maximums}\PY{p}{[}\PY{n}{nCorners}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{}print(nth)}
+             
+             
+             \PY{c+c1}{\PYZsh{} Add all corners with r value larger than the nth to the output array}
+             \PY{n}{corners} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nCorners}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{h} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{height}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{width}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{r}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{w}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{nth}\PY{p}{:}
+                         \PY{n}{corners}\PY{p}{[}\PY{n}{count}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{w}\PY{p}{,} \PY{n}{h}\PY{p}{]}\PY{p}{)}
+                         \PY{n}{count} \PY{o}{=} \PY{n}{count} \PY{o}{+} \PY{l+m+mi}{1}
+                     \PY{k}{if} \PY{n}{count} \PY{o}{==} \PY{n}{nCorners}\PY{p}{:}
+                         \PY{k}{break}
+                         
+             \PY{k}{return} \PY{n}{corners}
+         
+         \PY{c+c1}{\PYZsh{} detect corners on the two provided images}
+         \PY{c+c1}{\PYZsh{} adjust your corner detection parameters here}
+         \PY{n}{nCorners} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{smoothSTD} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{windowSize} \PY{o}{=} \PY{l+m+mi}{11}
+         
+         \PY{c+c1}{\PYZsh{} read images and detect corners on images}
+         \PY{n}{imgs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{corners} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{img} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{almond}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{imgs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{rgb2gray}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{)}
+             \PY{n}{cornersof} \PY{o}{=} \PY{n}{corner\PYZus{}detect}\PY{p}{(}\PY{n}{imgs}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{nCorners}\PY{p}{,} \PY{n}{smoothSTD}\PY{p}{,} \PY{n}{windowSize}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}print(cornersof)}
+             \PY{n}{corners}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cornersof}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{show\PYZus{}corners\PYZus{}result}\PY{p}{(}\PY{n}{imgs}\PY{p}{,} \PY{n}{corners}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}
+             \PY{n}{ax1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{221}\PY{p}{)}
+             \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{imgs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{corners}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{corners}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{35}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{facecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{ax2} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{222}\PY{p}{)}
+             \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{imgs}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{corners}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{corners}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{35}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{facecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{show\PYZus{}corners\PYZus{}result}\PY{p}{(}\PY{n}{imgs}\PY{p}{,} \PY{n}{corners}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Feature Matching using
+SIFT}\label{feature-matching-using-sift}
+
+We have two overlapping images of a scene, and we would like to detect
+and match features (corners) across them. In order to do so, we will
+compute feature descriptors for the patches around the points and
+perform matching using a "sum of squared differences" metric.
+
+First, you will want to implement a function which computes said metric.
+Given two vectors, \texttt{ssd} should return the sum of squared
+differences of their values:
+
+\[ssd(v, w) = \sum_i (v_i - w_i)^2\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{def} \PY{n+nf}{ssd}\PY{p}{(}\PY{n}{v1}\PY{p}{,} \PY{n}{v2}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Compute SSD (sum of squared differences) for two NumPy arrays.}
+         \PY{l+s+sd}{    This function will come in handy for descriptor matching later.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{output} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{v1}\PY{o}{\PYZhy{}}\PY{n}{v2}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{output}
+\end{Verbatim}
+
+
+    Now use your \texttt{ssd} function to perform feature matching. In the
+\texttt{SIFT\_matching} function, you should extract SIFT descriptors
+for the patches around the corners you've detected, then give each
+potential pair of matching descriptors to the \texttt{ssd} function to
+compute the distance between them. Also make use of Lowe's nearest
+neighbor thresholding idea, which says that the similarity of the
+closest match should be much higher than the similarity of the
+next-closest match. You can check this using the ratio of the SSD
+distance with the closest match and the next-closest match. By Lowe's
+empirical findings, you should only accept the best match if the ratio
+between its distance and the second-best distance is
+\textasciitilde{}0.75 or less. For better-looking results, please use a
+ratio of 0.3 for the purposes of this homework.
+
+We will use OpenCV's implementation of SIFT. To install OpenCV with pip,
+you can run
+
+\begin{verbatim}
+pip install opencv-python==3.4.2.16
+pip install opencv-contrib-python==3.4.2.16
+\end{verbatim}
+
+Please use this version of OpenCV, as earlier or later versions may not
+have everything you need. After creating a SIFT object with
+\texttt{cv.xfeatures2d.SIFT\_create}, you should use the
+\texttt{sift.compute} function, not \texttt{sift.detectAndCompute}
+function, since we still want to use the corners that we've detected.
+
+To summarize: in this question, you should extract SIFT descriptors for
+each corner. Then you should match SIFT descriptors according to an SSD
+metric. Check the ratio of the best match's distance to the second best
+match's distance and only accept the best match if it is significantly
+better than the next best match (i.e. it involves a significantly lower
+distance).
+
+\textbf{If necessary, tune the parameters so that you end up with about
+20 feature matches (starting with your 100 corners from the previous
+question).}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k+kn}{import} \PY{n+nn}{cv2}
+         
+         \PY{k}{def} \PY{n+nf}{SIFT\PYZus{}matching}\PY{p}{(}\PY{n}{img1}\PY{p}{,} \PY{n}{img2}\PY{p}{,} \PY{n}{corners1}\PY{p}{,} \PY{n}{corners2}\PY{p}{,} \PY{n}{SSDth}\PY{p}{,} \PY{n}{nn\PYZus{}threshold}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Compute matchings between two windows based on SIFT descriptors.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        img1: Image 1.}
+         \PY{l+s+sd}{        img2: Image 2.}
+         \PY{l+s+sd}{        corners1: Corners in image 1 (nx2)}
+         \PY{l+s+sd}{        corners2: Corners in image 2 (nx2)}
+         \PY{l+s+sd}{        SSDth: SSD distance threshold}
+         \PY{l+s+sd}{        NNth: nearest neighbor threshold}
+         
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        matching result – a list of (c1, c2) tuples, where}
+         \PY{l+s+sd}{        c1 is the 1x2 corner location in image 1, and}
+         \PY{l+s+sd}{        c2 is the 1x2 corner location in image 2. }
+         
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Your code here:}
+         \PY{l+s+sd}{    (feel free to change the below code, it is only provided for reference)}
+         \PY{l+s+sd}{    (you do not need to print out keypoints or descriptors in this function)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{if} \PY{n}{img1}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{:}
+                 \PY{n}{img1} \PY{o}{=} \PY{p}{(}\PY{n}{img1} \PY{o}{*} \PY{l+m+mf}{255.0}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{)}
+             \PY{n}{sift} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{xfeatures2d}\PY{o}{.}\PY{n}{SIFT\PYZus{}create}\PY{p}{(}\PY{p}{)}
+             \PY{n}{keypoints1} \PY{o}{=} \PY{p}{[}\PY{n}{cv2}\PY{o}{.}\PY{n}{KeyPoint}\PY{p}{(}\PY{n}{c}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{corners1}\PY{p}{]}
+             \PY{n}{keypoints1}\PY{p}{,} \PY{n}{descriptors1} \PY{o}{=} \PY{n}{sift}\PY{o}{.}\PY{n}{compute}\PY{p}{(}\PY{n}{img1}\PY{p}{,} \PY{n}{keypoints1}\PY{p}{)}
+             \PY{n}{corners1} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{kp}\PY{o}{.}\PY{n}{pt}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{kp}\PY{o}{.}\PY{n}{pt}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{kp} \PY{o+ow}{in} \PY{n}{keypoints1}\PY{p}{]}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}print(\PYZsq{}\PYZpc{}d keypoints\PYZsq{} \PYZpc{} len(keypoints1))}
+         \PY{l+s+sd}{    print(corners1)}
+         \PY{l+s+sd}{    print(\PYZsq{}\PYZpc{}d descriptors\PYZsq{} \PYZpc{} len(descriptors1))}
+         \PY{l+s+sd}{    print(descriptors1)\PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{k}{if} \PY{n}{img2}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{:}
+                 \PY{n}{img2} \PY{o}{=} \PY{p}{(}\PY{n}{img2} \PY{o}{*} \PY{l+m+mf}{255.0}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{)}
+             \PY{n}{sift} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{xfeatures2d}\PY{o}{.}\PY{n}{SIFT\PYZus{}create}\PY{p}{(}\PY{p}{)}
+             \PY{n}{keypoints2} \PY{o}{=} \PY{p}{[}\PY{n}{cv2}\PY{o}{.}\PY{n}{KeyPoint}\PY{p}{(}\PY{n}{c}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{corners2}\PY{p}{]}
+             \PY{n}{keypoints2}\PY{p}{,} \PY{n}{descriptors2} \PY{o}{=} \PY{n}{sift}\PY{o}{.}\PY{n}{compute}\PY{p}{(}\PY{n}{img2}\PY{p}{,} \PY{n}{keypoints2}\PY{p}{)}
+             \PY{n}{corners2} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{kp}\PY{o}{.}\PY{n}{pt}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{kp}\PY{o}{.}\PY{n}{pt}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{kp} \PY{o+ow}{in} \PY{n}{keypoints2}\PY{p}{]}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}print(\PYZsq{}\PYZpc{}d keypoints\PYZsq{} \PYZpc{} len(keypoints2))}
+         \PY{l+s+sd}{    print(corners2)}
+         \PY{l+s+sd}{    print(\PYZsq{}\PYZpc{}d descriptors\PYZsq{} \PYZpc{} len(descriptors2))}
+         \PY{l+s+sd}{    print(descriptors2)}
+         \PY{l+s+sd}{    print(descriptors2[0])\PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{len1} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{keypoints1}\PY{p}{)}
+             \PY{n}{len2} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{keypoints2}\PY{p}{)}
+             
+             \PY{n}{match} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{[}\PY{n}{len1}\PY{p}{,} \PY{n}{len2}\PY{p}{]}\PY{p}{)}
+             
+             
+             \PY{c+c1}{\PYZsh{} Match all the possible points (find the best match for each point)}
+             \PY{n}{matching} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{len1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{best\PYZus{}match} \PY{o}{=} \PY{p}{[}\PY{n}{SSDth} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{SSDth} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{]}
+                 \PY{n}{second\PYZus{}best} \PY{o}{=} \PY{p}{[}\PY{n}{SSDth} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{len2}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{ssd\PYZus{}val} \PY{o}{=} \PY{n}{ssd}\PY{p}{(}\PY{n}{descriptors1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{descriptors2}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{match}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{ssd\PYZus{}val}
+                     \PY{k}{if} \PY{n}{ssd\PYZus{}val} \PY{o}{\PYZlt{}} \PY{n}{best\PYZus{}match}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                         \PY{n}{best\PYZus{}match}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{best\PYZus{}match}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                         \PY{n}{best\PYZus{}match}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{ssd\PYZus{}val}
+                         \PY{n}{best\PYZus{}match}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{)}
+                     \PY{k}{elif} \PY{n}{ssd\PYZus{}val} \PY{o}{\PYZlt{}} \PY{n}{best\PYZus{}match}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{:}
+                         \PY{n}{best\PYZus{}match}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{ssd\PYZus{}val}
+                 \PY{n}{matching}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{best\PYZus{}match}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Another matching method}
+             \PY{n}{matching} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{matching}\PY{p}{)}
+             
+             
+             \PY{c+c1}{\PYZsh{}Apply the thresholds and SSD values}
+             \PY{n}{output} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{while} \PY{n+nb}{len}\PY{p}{(}\PY{n}{matching}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1} \PY{o+ow}{and} \PY{n+nb}{len}\PY{p}{(}\PY{n}{output}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{20}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{matching}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{SSDth}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{matching}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/} \PY{n}{matching}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{nn\PYZus{}threshold}\PY{p}{:}
+                         \PY{n}{output}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{matching}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{matching}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Formatting the ouput}
+             \PY{n}{final} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{output}\PY{p}{:}
+                 \PY{n}{final}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{corners1}\PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{corners2}\PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{final}
+         
+         \PY{c+c1}{\PYZsh{} plot matching result}
+         \PY{k}{def} \PY{n+nf}{show\PYZus{}matching\PYZus{}result}\PY{p}{(}\PY{n}{img1}\PY{p}{,} \PY{n}{img2}\PY{p}{,} \PY{n}{matching}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{img1}\PY{p}{,} \PY{n}{img2}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{for} \PY{n}{p1}\PY{p}{,} \PY{n}{p2} \PY{o+ow}{in} \PY{n}{matching}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{p1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{p1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{35}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{facecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{p2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{img1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{p2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{35}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{facecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{p1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{p2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{img1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{p1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{p2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} match corners}
+         \PY{n}{SSDth} \PY{o}{=} \PY{l+m+mi}{60000}
+         \PY{n}{NNth} \PY{o}{=} \PY{l+m+mf}{0.4}
+         \PY{n}{matching} \PY{o}{=} \PY{n}{SIFT\PYZus{}matching}\PY{p}{(}\PY{n}{imgs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{255}\PY{p}{,} \PY{n}{imgs}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{255}\PY{p}{,} \PY{n}{corners}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{corners}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{SSDth}\PY{p}{,} \PY{n}{NNth}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}print(len(matching))}
+         \PY{n}{show\PYZus{}matching\PYZus{}result}\PY{p}{(}\PY{n}{imgs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{imgs}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{matching}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{Submission Instructions}\label{submission-instructions}
+
+Remember to submit a PDF version of this notebook to Gradescope. Please
+make sure the contents in each cell are clearly shown in your final PDF
+file.
+
+There are multiple options for converting the notebook to PDF: 1. You
+can find the export option at File \(\rightarrow\) Download as
+\(\rightarrow\) PDF via LaTeX 2. You can first export as HTML and then
+convert to PDF
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
